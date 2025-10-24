@@ -2,11 +2,11 @@
 // 明天的預設日期格式
 function getDefaultDate() {
   const FurtherDate = new Date();
-  FurtherDate.setDate(FurtherDate.getDate() + 30);
+  FurtherDate.setDate(FurtherDate.getDate() + 31);
   return FurtherDate.toISOString().split('T')[0]; // yyyy-mm-dd
 }
+
 // 把开始处的 '+' 替换为 '00'，并返回新的字符串。
-// 如果你希望替换所有 '+'，把 replace 的第二个参数改为 '00' 并使用 /\\+/g
 function convertPlusTo00(str) {
   if (!str || typeof str !== 'string') return str || '';
   return str.replace(/^\+/g, '00');   // 只把开头的 '+' 替换为 '00'（如果需要替换所有 '+' 可改为 str.replace(/\+/g, '00')）
@@ -54,19 +54,13 @@ document.addEventListener('DOMContentLoaded', () => {
   clearBtn.addEventListener('click', () => {
     // 清空所有欄位值
     console.log("clean all fields");
-    document.getElementById('seatNum').value = '';
+    document.getElementById('seatNum').value = '3';
+    document.getElementById('date').value = getDefaultDate();
     document.getElementById('name').value = '';
     document.getElementById('phone').value = '';
     document.getElementById('email').value = '';
   
-    // 重設日期為明天
-    const tomorrow = new Date();
-    tomorrow.setDate(tomorrow.getDate() + 1);
-    const yyyy = tomorrow.getFullYear();
-    const mm = String(tomorrow.getMonth() + 1).padStart(2, '0');
-    const dd = String(tomorrow.getDate()).padStart(2, '0');
-    document.getElementById('date').value = `${yyyy}-${mm}-${dd}`;
-  
+
     // 清除儲存在 chrome.storage 的資料
     chrome.storage.local.remove('reservationConfig', () => {
       console.log('信息已重置/All info Reset');

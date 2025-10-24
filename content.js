@@ -1,4 +1,6 @@
-let BIFR = {}; // 存储预约配置
+let BIFR = {};
+let hours, minutes, seconds, msUntil1800;
+
 
 // 等待元素出现并执行回调函数
 function waitForElements(selectors, callback) {
@@ -45,6 +47,14 @@ function selectTimeSlot() {
 
   let foundAvailableTime = false; // 标记是否找到可用时间
 
+  /*/ 检查当前页面是否为选座页面
+  const isSeatSelectionPage = document.querySelector('.seattypetext.level-left');  // 假设选座页面有这个类
+  if (!isSeatSelectionPage) {
+    console.log('[Bot] 当前不是选座页面，不执行刷新');
+    return;
+  }
+*/
+
   // 按优先级检查每个座位类型
   seatPriority.forEach((seatType) => {
     if (foundAvailableTime) return; // 如果已经找到一个可用的时间，跳出循环
@@ -63,7 +73,8 @@ function selectTimeSlot() {
   });
 
   if (!foundAvailableTime) {
-    console.log('[Bot] 没有找到可用的时间');
+    console.log('[Bot] 没有找到可用的时间，刷新页面重试...');
+  // window.location.reload();
   }
 }
 
@@ -143,14 +154,15 @@ function waitUntilJapan1800(callback) {
   const now = new Date();
   const japanTime = new Date(now.toLocaleString("en-US", { timeZone: "Asia/Tokyo" }));
 
-  const hours = japanTime.getHours();
-  const minutes = japanTime.getMinutes();
-  const seconds = japanTime.getSeconds();
+  hours = japanTime.getHours();
+  minutes = japanTime.getMinutes();
+  seconds = japanTime.getSeconds();
 
   // 如果在 17:59:00 ~ 17:59:59.999 之间，则等待到18:00:00再执行
   if (hours === 17 && minutes === 59) {
-    const msUntil1800 =
-        (60 - seconds) * 1000 - japanTime.getMilliseconds();
+  //if (hours === 13 && minutes === 59) {
+    msUntil1800 = (60 - seconds) * 1000 - japanTime.getMilliseconds();
+        //(60 - seconds) * 1000 - japanTime.getMilliseconds();
     console.log(`[Bot] 当前为日本时间 ${hours}:${minutes}:${seconds}，将在 ${msUntil1800} 毫秒后（18:00 JST）自动开始`);
     setTimeout(callback, msUntil1800);
   } else {
@@ -187,19 +199,33 @@ function main() {
           text: `自动填入Autofill ${BIFR['SEAT_NUM']} 人`,
           selector: 'body > div.container > div > div.column.is-8 > div > div.field > form > div > select'
         },
-        {text: '自动选择预约日期Automatically select desired reservation date', selector: 'form#step2-form'},
-        {text: '自动选择能预约的最近时间Automatically select the nearest available reservation time', selector: 'aaa'}, //优先按照ABCD席位排序，其次按照时间早晚排序，选择最近的一个。
-        {text: '填写预存信息Autofill Basic information', selector: 'bbb'},
+        {
+          text: `自动选择预约日期Automatically select desired reservation date ${BIFR['DATE']}`,
+          selector: 'form#step2-form'
+        },
+        {
+          text: '自动选择能预约的最近时间Automatically select the nearest available reservation time',
+          selector: 'aaa'
+        }, //优先按照ABCD席位排序，其次按照时间早晚排序，选择最近的一个。
+        {
+          text: '填写预存信息Autofill Basic information',
+          selector: 'bbb'
+        },
+        {
+          text: `[Bot] 当前为日本时间 ${hours}:${minutes}:${seconds}，将在 ${msUntil1800} 毫秒后（18:00 JST）自动开始`,
+          selector: 'ccc'
+        },
       ];
       createStatusUI();
       updateStatusUI();
       createToggleButton();
 
       if (isPaused()) {
-        console.log('[Bot] 暂停状体啊，不执行自动操作');
+        console.log('[Bot] 暂停状态，不执行自动操作');
         return;
       }
 
+      //寻找操作内容？？
       tryClick('#forms-agree > div > div > div.button-container > label', '打勾同意');
       tryClick('#forms-agree > div > div > div.button-container-agree > button', '點選同意按鈕');
       tryClick('#amzn-captcha-verify-button', '按鈕captcha');
@@ -332,3 +358,7 @@ if (document.readyState === 'complete') {
 } else {
   window.addEventListener('load', () => waitUntilJapan1800(main));
 }
+
+
+//席位预约，如果满席就继续刷新，适用20分钟的情况
+//如果504，继续刷新？？？
