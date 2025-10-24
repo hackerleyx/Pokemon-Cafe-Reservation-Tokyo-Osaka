@@ -47,7 +47,7 @@
 
 ## Usage/使用
 1. 点击扩展程序的图标，填写预约人数、希望预约的日期、姓名、手机号和email后，点击保存设置。
-2. 访问https://reserve.pokemon-cafe.jp/或https://osaka.pokemon-cafe.jp/，右下角出现提示即可正常使用
+2. 访问[宝可梦咖啡-东京·日本桥](https://reserve.pokemon-cafe.jp/)或[宝可梦咖啡-大阪·心斋桥](https://osaka.pokemon-cafe.jp/)，右下角出现提示即可正常使用
 
 
 
