@@ -1,11 +1,11 @@
-#Pokémon Cafe Reservation Assistant
+# Pokémon Cafe Reservation Assistant
 
 - I'm not good at English, so the following content is most  from Google Translate. If something is wrong or ambiguities, please let me know.😊
 
-##Description/项目简介
+## Description/项目简介
 A Chrome extension that automatically submits and refreshes Pokémon Cafe reservations based on pre-set information. Available at Pokémon Cafes in Tokyo and Osaka.
 
-###Functionality
+### Functionality
 1. Auto-Refresh: If the website displays "アクセスが集中し、サイトが混み合っております。The site is congested due to heavy access." the program will automatically and safely refresh the site.
     - Automatically clicks/performs required buttons/actions on the reservation website.
     - "Let's confirm you are human" - except for the image selection page, confirmation page for filling in reservation information, and subsequent operations. Because: The confirmation page can only be completed manually.
@@ -28,16 +28,16 @@ A Chrome extension that automatically submits and refreshes Pokémon Cafe reserv
 
 - The extension's current functionality can only help you so much; the rest depends on your internet speed and luck. I wish you all a smooth reservation.
 
-##Installation
+## Installation
 
-###Methon I
+### Methon I
 1. Download the ".crx" file from releases.
 2. Open Chrome and manage your extensions, or simply enter chrome://extensions in the address bar.
 3. Enable "Developer Mode" in the top-right corner.
 4. Drop the file into Chrome.
 5. When "Reserve Pokemon Cafe - Tokyo & Osaka" appears in the extension, installation is complete.
 
-###Methon II
+### Methon II
 1. Download and unzip the project.
 
 2. Open Chrome and manage your extensions, or simply enter chrome://extensions in the address bar.
@@ -60,7 +60,7 @@ A Chrome extension that automatically submits and refreshes Pokémon Cafe reserv
 
 1. Click the extension icon, enter the number of people, desired reservation date, name, phone number, and email address, and click Save.
 2. Visit website [Pokémon Cafe in Nihonbashi, Tokyo](https://reserve.pokemon-cafe.jp/)or  [Pokémon Cafe in Shinsaibashi, Osaka](https://osaka.pokemon-cafe.jp/), and a prompt will appear in the lower right corner to start normal operation.
-   ###Details:
+   ### Details:
 - If you haven't used the extension to save your reservation information, when you visit either of these websites, you'll see a prompt saying, "Please click on the plug-in to set the basic information"
 
 - The default "Desired Reservation Date" is the latest available day (new reservations open at 6:00 PM JST).
@@ -73,7 +73,7 @@ A Chrome extension that automatically submits and refreshes Pokémon Cafe reserv
     - On the reservation information page, your pre-set information will automatically populate in the corresponding fields. However, you'll need to manually click "Submit" and proceed with the subsequent steps, including checking your email, entering your "Verification Code" (a 6-digit code consisting of uppercase and lowercase characters and numbers) on the next page, and confirming your reservation.
 
 
-###Important Note
+### Important Note
 Because Pokémon Cafe reservations are extremely popular and typically sell out within a minute, you can/should:
 
 - Visit the website for the first time around 5:55 PM Japan time (4:55 PM Beijing time, all times below are based on Japan time, minus one hour in China). Visit the website around 5:55 PM Japan time (4:55 PM Beijing time, all times below are based on Japan time, minus one hour in China) and complete the "We need to verify you're human" section. Each verification process takes about 5-10 minutes, so avoid verifying too early to avoid being redirected to this verification process at 6:00 PM and missing out on the opportunity.
@@ -86,13 +86,13 @@ Because Pokémon Cafe reservations are extremely popular and typically sell out 
 
       -Currently, when testing, the page doesn't display anything when the program is paused. Don't panic; the program is running. Do not open the extension or refresh the page. I will fix this issue as soon as possible.
 
--Notes on setting up reservation information:
+- Notes on setting up reservation information:
 1. The minimum number of people is 1, and the maximum is 6.
 2. For your name, Separate your firstname and lastname with spaces, such as "Jone Doe"
 3. For your phone number, you can enter your domestic phone number, but please pay attention to the format. If your phone number is 3012345678, you can enter it as 3012345678, 13012345678, or 0013012345678. All of these will pass the website verification. If you enter it as +13012345678, the program will automatically convert it to 0013012345678 and enter it on the website.
 4. For your Email Address,  use your real email address. You need revieve Authentication code.
 
-###Other booking tips(from Reddit).
+### Other booking tips(from Reddit).
 
 - 20 and 40 minute mark chances:
 
