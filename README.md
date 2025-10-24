@@ -1,6 +1,6 @@
 # 宝可梦咖啡预定辅助工具
 
-
+Read this in English: [English](README_en.md)
 
 ## Description/项目简介
 
