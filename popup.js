@@ -2,7 +2,7 @@
 // 明天的預設日期格式
 function getDefaultDate() {
   const FurtherDate = new Date();
-  FurtherDate.setDate(FurtherDate.getDate() + 31);
+  FurtherDate.setDate(FurtherDate.getDate() + 30);
   return FurtherDate.toISOString().split('T')[0]; // yyyy-mm-dd
 }
 // 把开始处的 '+' 替换为 '00'，并返回新的字符串。
@@ -22,9 +22,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('seatNum').value = config.SEAT_NUM || 3;
     document.getElementById('date').value = config.DATE || getDefaultDate();
-    document.getElementById('name').value = config.name || 'Zhang San';
-    document.getElementById('phone').value = config.phone || '8613000000000';
-    document.getElementById('email').value = config.email || 'youremail@gmail.com';
+    document.getElementById('name').value = config.name || '';
+    document.getElementById('phone').value = config.phone || '';
+    document.getElementById('email').value = config.email || '';
   });
 
   // 儲存按鈕行為
