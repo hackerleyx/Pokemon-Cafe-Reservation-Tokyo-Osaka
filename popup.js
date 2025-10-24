@@ -74,3 +74,29 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   
 });
+
+// 复选框多语言切换
+const langCnCheckbox = document.getElementById('lang-cn');
+const langEnCheckbox = document.getElementById('lang-en');
+
+function updateLanguageCheckbox() {
+  // 获取所有 cn 和 en 元素
+  const cnEls = document.querySelectorAll('.cn');
+  const enEls = document.querySelectorAll('.en');
+
+  // 控制中文显示
+  cnEls.forEach(el => {
+    el.style.display = langCnCheckbox.checked ? '' : 'none';
+  });
+
+  // 控制英文显示
+  enEls.forEach(el => {
+    el.style.display = langEnCheckbox.checked ? '' : 'none';
+  });
+}
+
+langCnCheckbox.addEventListener('change', updateLanguageCheckbox);
+langEnCheckbox.addEventListener('change', updateLanguageCheckbox);
+
+// 默认只显示中文
+updateLanguageCheckbox();
