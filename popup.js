@@ -20,11 +20,11 @@ document.addEventListener('DOMContentLoaded', () => {
   chrome.storage.local.get('reservationConfig', (result) => {
     const config = result.reservationConfig || {};
 
-    document.getElementById('seatNum').value = config.SEAT_NUM || 4;
+    document.getElementById('seatNum').value = config.SEAT_NUM || 3;
     document.getElementById('date').value = config.DATE || getDefaultDate();
-    document.getElementById('name').value = config.name || 'Li Yanxiang';
-    document.getElementById('phone').value = config.phone || '8615822747846';
-    document.getElementById('email').value = config.email || 'hackerleyx@gmail.com';
+    document.getElementById('name').value = config.name || 'Zhang San';
+    document.getElementById('phone').value = config.phone || '8613000000000';
+    document.getElementById('email').value = config.email || 'youremail@gmail.com';
   });
 
   // 儲存按鈕行為
@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
           chrome.tabs.reload(tabs[0].id);
         }
       });
-      console.log('設定已儲存！');
+      console.log('已保存！');
     });
   });
 

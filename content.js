@@ -168,35 +168,35 @@ function main() {
       console.log('已读取设定：', BIFR);
       STATUS_SELECTORS = [
         {
-          text: '自动勾选"同意する / Agree to terms"',
+          text: '自动勾选Automatically select"同意する / Agree to terms"',
           selector: '#forms-agree > div > div > div.button-container > label'
         },
         {
-          text: '自动勾选"同意して進む / (Go to the Reservation Page)" ）',
+          text: '自动点击Automatically click"同意して進む / (Go to the Reservation Page)" ）',
           selector: '#forms-agree > div > div > div.button-container-agree > button'
         },
         {
-          text: '自动点击captcha verify 按鈕，请手动选择图片并确认，之后步骤将自动继续',
+          text: '自动点击开始按鈕，请手动选择图片并确认，之后步骤将自动继续，Automatically select start button',
           selector: '#amzn-captcha-verify-button'
         },
         {
-          text: '自动点击"予約へ進む(Make a Reservation)"',
+          text: '自动点击Automatically select"予約へ進む(Make a Reservation)"',
           selector: 'body > div.container > div > div.column.is-8 > div > div.button-container > a'
         },
         {
-          text: `自动填入 ${BIFR['SEAT_NUM']} 人`,
+          text: `自动填入Autofill ${BIFR['SEAT_NUM']} 人`,
           selector: 'body > div.container > div > div.column.is-8 > div > div.field > form > div > select'
         },
-        {text: '自动选择预约日期', selector: 'form#step2-form'},
-        {text: '自动选择能预约的最近时间', selector: 'aaa'}, //优先按照ABCD席位排序，其次按照时间早晚排序，选择最近的一个。
-        {text: '填写预存信息', selector: 'bbb'},
+        {text: '自动选择预约日期Automatically select desired reservation date', selector: 'form#step2-form'},
+        {text: '自动选择能预约的最近时间Automatically select the nearest available reservation time', selector: 'aaa'}, //优先按照ABCD席位排序，其次按照时间早晚排序，选择最近的一个。
+        {text: '填写预存信息Autofill Basic information', selector: 'bbb'},
       ];
       createStatusUI();
       updateStatusUI();
       createToggleButton();
 
       if (isPaused()) {
-        console.log('[Bot] 目前為暫停狀態，不執行自動操作');
+        console.log('[Bot] 暂停状体啊，不执行自动操作');
         return;
       }
 
@@ -210,7 +210,7 @@ function main() {
       fillContactForm(); //填充预置信息
 
     } else {
-      console.warn('尚未設定參數');
+      console.warn('尚未设定参数');
       STATUS_SELECTORS = [
         {text: '请先点击插件，设置预约信息\n' + 'Please click on the plug-in to set the basic information'},
     ];
@@ -233,7 +233,7 @@ function tryClick(selector, actionText) {
   const el = document.querySelector(selector);
 
   if (el) {
-    console.log(`[Bot] 執行: ${actionText}`);
+    console.log(`[Bot] 运行: ${actionText}`);
     el.click();
   } else {
     console.log(`[Bot] 尚未找到: ${actionText}`);
@@ -271,37 +271,6 @@ function createStatusUI(isAlarm = false) {
   document.body.appendChild(container);
 }
 
-
-
-/*
-function createStatusUI() {
-  if (document.getElementById('__pokemon_cafe_status_container__')) return;
-
-  const container = document.createElement('div');
-  container.id = '__pokemon_cafe_status_container__';
-  container.style.position = 'fixed';
-  container.style.bottom = '80px';
-  container.style.right = '20px';
-  container.style.backgroundColor = '#f1f1f1';
-  container.style.border = '1px solid #999';
-  container.style.padding = '10px';
-  container.style.zIndex = '9999';
-  container.style.borderRadius = '5px';
-  container.style.fontSize = '12px';
-  container.style.boxShadow = '0 0 5px rgba(0,0,0,0.2)';
-
-  STATUS_SELECTORS.forEach((s, idx) => {
-    const div = document.createElement('div');
-    div.innerText = s.text;
-    div.dataset.selector = s.selector;
-    div.id = `status-step-${idx}`;
-    div.style.marginBottom = '4px';
-    container.appendChild(div);
-  });
-
-  document.body.appendChild(container);
-}
-*/
 // 更新状态 UI
 function updateStatusUI() {
   STATUS_SELECTORS.forEach((s, idx) => {
@@ -323,7 +292,7 @@ function updateStatusUI() {
 // 创建切换按钮
 function createToggleButton() {
   const btn = document.createElement('button');
-  btn.innerText = isPaused() ? '▶️ 開始' : '⏸️ 暫停';
+  btn.innerText = isPaused() ? '▶️ 开始/Start' : '⏸️ 暂停/Pause';
   btn.style.position = 'fixed';
   btn.style.bottom = '20px';
   btn.style.right = '20px';
@@ -339,60 +308,25 @@ function createToggleButton() {
     const now = isPaused();
     const newState = now ? 'running' : 'paused';
     localStorage.setItem('__pokemon_cafe_toggle_state__', newState);
-    btn.innerText = newState === 'running' ? '⏸️ 暫停' : '▶️ 開始';
+    btn.innerText = newState === 'running' ? '⏸️ 暂停/Pause' : '▶️ 开始/Start';
     handleExecutionStateChange();
   };
   document.body.appendChild(btn);
 }
-/*
-function createAlarmUI() {
-  if (document.getElementById('__pokemon_cafe_status_container__')) return;
 
-  const container = document.createElement('div');
-  container.id = '__pokemon_cafe_status_container__';
-  container.style.position = 'fixed';
-  container.style.bottom = '80px';
-  container.style.right = '20px';
-  container.style.backgroundColor = '#f1f1f1';
-  container.style.border = '1px solid #ff0000';
-  container.style.padding = '10px';
-  container.style.zIndex = '9999';
-  container.style.borderRadius = '5px';
-  container.style.fontSize = '12px';
-  container.style.boxShadow = '0 0 5px rgba(0,0,0,0.2)';
-
-  STATUS_SELECTORS.forEach((s, idx) => {
-    const div = document.createElement('div');
-    div.innerText = s.text;
-    div.dataset.selector = s.selector;
-    div.id = `AlarmText`;
-    div.style.marginBottom = '4px';
-    div.style.color  = '#ff0000';
-    container.appendChild(div);
-  });
-
-  document.body.appendChild(container);
-}
-*/
 
 // 切换执行状态
 function handleExecutionStateChange() {
   if (isPaused()) {
-    console.log('[Bot] 切換為暫停狀態');
+    console.log('[Bot] 程序暂停Pausing');
   } else {
-    console.log('[Bot] 切換為執行狀態');
+    console.log('[Bot] 程序运行Running');
     main(); // 初始先執行一次
   }
 }
 
 // 页面加载完成后执行
-/*
-if (document.readyState === 'complete') {
-  main();
-} else {
-  window.addEventListener('load', main);
-}
-*/
+
 if (document.readyState === 'complete') {
   waitUntilJapan1800(main);
 } else {
