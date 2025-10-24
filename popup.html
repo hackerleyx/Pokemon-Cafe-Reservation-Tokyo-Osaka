@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>预约信息设置<br />Basic information settings</title>
+  <style>
+    body { font-family: Arial; padding: 10px; width: 250px; }
+    label { display: block; margin-top: 10px; }
+    input { width: 100%; padding: 4px; box-sizing: border-box; }
+    button { margin-top: 10px; width: 45%; padding: 6px; }
+  </style>
+</head>
+<body>
+  <h1>预约信息设置<br />Basic information settings</h1>
+  <form id="reservationForm">
+    <button style="color:green" type="submit" id="saveBtn">保存设置/Save</button>&nbsp;&nbsp;&nbsp;&nbsp;
+    <button type="button" id="clearBtn">清除设置/Reset</button><br>
+    <div id="info" style="color:red">
+    *保存设置后，插件才能显示并使用。<br>*After saving the settings, the plugin will be displayed and available for use
+    </div>
+    <label>
+      预约人数(最少填1，最多填6）：
+      <input type="number" id="seatNum" name="seatNum" min="1" max="6" required>
+      <br>*何名で来店されますか？/Number of Guests. Up to 6 Guests Per Reservation.
+    </label>
+    <br>
+    <label>
+      希望预约的日期/Desired reservation date：
+      <input type="date" id="date" name="date" required>
+    </label>
+    <br>
+    <label>
+      姓名/Full name：
+      <input type="text" id="name" name="name" required>
+      <br>*提示：拼音即可，姓名中间空格，对应表单中お名前 (Name)和ふりがな (Please enter your name again)两项<br>Tips:Enter your name in english.
+    </label>
+    <br>
+    <label>
+      手机号/Tel：
+      <input
+        type="tel"
+        id="phone"
+        name="phone"
+        required
+        inputmode="numeric"
+        oninput="
+          // 只允许数字和加号
+          this.value = this.value.replace(/[^0-9+]/g, '');
+          // 如果以 + 开头，则替换为 00
+          if (this.value.startsWith('+')) {
+            this.value = this.value.replace(/^\+/, '00');
+          }
+        "
+      >
+      <br>*電話番号 (Phone number)
+    </label>
+    <br>
+    <label>
+      Email：
+      <input type="email" id="email" name="email" required>
+      <br>*メールアドレス (E-mail Address)
+    </label>
+    <br><br>
+
+  </form>
+
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+{
+  "manifest_version": 3,
+  "name": "Reserve Pokemon Cafe-Tokyo&Osaka",
+  "version": "1.0",
+  "description": "Auto-click tool for Pokemon Cafe reservation site.",
+  "permissions": [
+    "storage", 
+    "scripting", 
+    "tabs"
+  ],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "host_permissions": [
+    "https://osaka.pokemon-cafe.jp/*",
+    "https://reserve.pokemon-cafe.jp/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://osaka.pokemon-cafe.jp/*",
+        "https://reserve.pokemon-cafe.jp/*"
+      ],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "icons": {
+    "48": "favicon.png"
+  }
+}
